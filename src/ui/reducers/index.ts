@@ -6,15 +6,15 @@ import { GameState, Position } from "@app/ui/containers/Game";
 import { CellState, Color, Place } from "@app/ui/types";
 import * as _ from "lodash";
 
-function turn(state: Color, action: Action): Color {
+export function turn(state: Color, action: Action): Color {
   return state == "b" ? "w" : "b";
 }
 
-function cells(state: CellState[], action: Action): CellState[] {
+export function cells(state: CellState[], action: Action): CellState[] {
   return state;
 }
 
-function move(state: GameState, place?: Place): GameState {
+export function move(state: GameState, place?: Place): GameState {
   const latest = _.last(state.positions) as Position;
   const nextTurn: Color = latest.turn == "b" ? "w" : "b";
   const board =

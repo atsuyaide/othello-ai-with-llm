@@ -1,3 +1,5 @@
+import * as Board from "@app/bitboard/Board";
+import * as Move from "@app/bitboard/move";
 import * as actions from "@app/ui/actions";
 import { Main } from "@app/ui/components/Main";
 import { CellState, Color, Place } from "@app/ui/types";
