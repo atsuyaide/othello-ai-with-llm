@@ -1,26 +1,30 @@
-import { Place } from "ui/types"
+import { Place } from "ui/types";
 
-export type Action = ClickCellAction | ClickPrevAction | ClickPassAction | LaunchAiAction
+export type Action =
+  | ClickCellAction
+  | ClickPrevAction
+  | ClickPassAction
+  | LaunchAiAction;
 
 interface ClickCellAction {
-    type: "click_cell"
-    place: Place
+  type: "click_cell";
+  place: Place;
 }
 export function clickCell(place: Place): ClickCellAction {
-    return { type: "click_cell", place }
+  return { type: "click_cell", place };
 }
 
 interface ClickPrevAction {
-    type: "click_prev"
+  type: "click_prev";
 }
-export const clickPrev = { type: "click_prev" }
+export const clickPrev = { type: "click_prev" };
 
 interface ClickPassAction {
-    type: "click_pass"
+  type: "click_pass";
 }
-export const clickPass = { type: "click_pass" }
+export const clickPass = { type: "click_pass" };
 
 interface LaunchAiAction {
-    type: "launch_ai"
+  type: "launch_ai";
 }
-export const aiMove = { type: "launch_ai" }
+export const aiMove = { type: "launch_ai" };

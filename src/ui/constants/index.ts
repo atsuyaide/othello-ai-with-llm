@@ -1,18 +1,75 @@
-import * as _ from "lodash"
-import { CellState } from "ui/types"
+import * as _ from "lodash";
+import { CellState } from "ui/types";
 
 export const initialBoard: CellState[] = [
-    ".", ".", ".", ".", ".", ".", ".", ".",
-    ".", ".", ".", ".", ".", ".", ".", ".",
-    ".", ".", ".", ".", ".", ".", ".", ".",
-    ".", ".", ".", "w", "b", ".", ".", ".",
-    ".", ".", ".", "b", "w", ".", ".", ".",
-    ".", ".", ".", ".", ".", ".", ".", ".",
-    ".", ".", ".", ".", ".", ".", ".", ".",
-    ".", ".", ".", ".", ".", ".", ".", ".",
-]
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  "w",
+  "b",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  "b",
+  "w",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+  ".",
+];
 
-export const lastTwentyBoard: CellState[] = _.flatten(`
+export const lastTwentyBoard: CellState[] = _.flatten(
+  `
 .w......
 ..www...
 .bwwbb..
@@ -21,9 +78,14 @@ bwwwwb.b
 bbbwwwwb
 b.bbwwbb
 b.wwww.b
-`.split("\n").slice(1, 9).map(r => r.split("") as CellState[]))
+`
+    .split("\n")
+    .slice(1, 9)
+    .map((r) => r.split("") as CellState[])
+);
 
-export const lastOneBoard: CellState[] = _.flatten(`
+export const lastOneBoard: CellState[] = _.flatten(
+  `
 bbbbbbbb
 bbbbbww.
 bbbbwwwb
@@ -32,9 +94,14 @@ wwwwbbwb
 bwwbbwwb
 bwwwwwwb
 bbbbbbbb
-`.split("\n").slice(1, 9).map(r => r.split("") as CellState[]))
+`
+    .split("\n")
+    .slice(1, 9)
+    .map((r) => r.split("") as CellState[])
+);
 
-export const shouldPassBoard: CellState[] = _.flatten(`
+export const shouldPassBoard: CellState[] = _.flatten(
+  `
 bbbb....
 bbbbb...
 bbbbbb..
@@ -43,9 +110,14 @@ wwbwbbbb
 bwwbbwwb
 bwwwwwwb
 bbbbbbbb
-`.split("\n").slice(1, 9).map(r => r.split("") as CellState[]))
+`
+    .split("\n")
+    .slice(1, 9)
+    .map((r) => r.split("") as CellState[])
+);
 
-export const lastOneBoard2: CellState[] = _.flatten(`
+export const lastOneBoard2: CellState[] = _.flatten(
+  `
 bbbbwww.
 bbbwwwwb
 bbwbbbbb
@@ -54,7 +126,11 @@ wwwwbwbb
 bwwbwbwb
 bwwwwbwb
 bbbbbbbb
-`.split("\n").slice(1, 9).map(r => r.split("") as CellState[]))
+`
+    .split("\n")
+    .slice(1, 9)
+    .map((r) => r.split("") as CellState[])
+);
 
 export const check1: CellState[] = toState(`
 ........
@@ -65,7 +141,7 @@ bbbbbbbw
 .bbbwwww
 ..bwwb.w
 ..bbbb..
-`)
+`);
 
 export const check2: CellState[] = toState(`
 ........
@@ -76,7 +152,7 @@ wwbwbbb.
 wwwbbb..
 ..wbb...
 ..w.....
-`)
+`);
 
 export const check3: CellState[] = toState(`
 ........
@@ -87,7 +163,7 @@ wwbwbwb.
 wwwbb...
 ..wbb...
 ..w.....
-`)
+`);
 
 export const expr: CellState[] = toState(`
 www..ww.
@@ -98,7 +174,7 @@ w.w.....
 w.w..w.w
 ww....ww
 www..www
-`)
+`);
 
 export const wpass: CellState[] = toState(`
 bbbbbbb.
@@ -109,8 +185,13 @@ wwwwbwwb
 wwbbwbbb
 wwwwwwbb
 bbbbbbbb
-`)
+`);
 
 function toState(str: string) {
-    return _.flatten(str.split("\n").slice(1, 9).map(r => r.split("") as CellState[]))
+  return _.flatten(
+    str
+      .split("\n")
+      .slice(1, 9)
+      .map((r) => r.split("") as CellState[])
+  );
 }

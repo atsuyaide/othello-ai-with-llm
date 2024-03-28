@@ -1,42 +1,39 @@
-import * as React from "react"
-import * as ReactDOM from "react-dom"
-import { Store, Middleware } from "redux"
-import { applyMiddleware, createStore } from "redux"
-import { createLogger } from "redux-logger"
-import { Provider } from "react-redux"
-import { Game, GameState } from "ui/containers/Game"
-import { reducers } from "ui/reducers"
-import * as Constants from "ui/constants"
-import { bench } from "bitboard/bench"
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore, Middleware, Store } from "redux";
+import { createLogger } from "redux-logger";
+import * as Constants from "ui/constants";
+import { Game, GameState } from "ui/containers/Game";
+import { reducers } from "ui/reducers";
 
 const middleWares: Middleware[] = [
-    process.env.NODE_ENV !== "production" && createLogger() as any
-].filter(Boolean)
+  process.env.NODE_ENV !== "production" && (createLogger() as any),
+].filter(Boolean);
 
 export function start(dom: HTMLElement | null) {
-    let store = createStore<GameState>(
-        reducers,
+  let store = createStore<GameState>(
+    reducers,
+    {
+      positions: [
         {
-            positions: [{
-                cells: Constants.initialBoard,
-                turn: "b"
-            }],
-            playerColor: "b"
+          cells: Constants.initialBoard,
+          turn: "b",
         },
-        applyMiddleware(...middleWares)
-    )
+      ],
+      playerColor: "b",
+    },
+    applyMiddleware(...middleWares)
+  );
 
-    ReactDOM.render(
-        <App store={store} />,
-        dom
-    )
+  ReactDOM.render(<App store={store} />, dom);
 }
 
 export interface AppProps {
-    store: Store<GameState>
+  store: Store<GameState>;
 }
 const App = ({ store }: AppProps) => (
-    <Provider store={store}>
-        <Game />
-    </Provider>
-)
+  <Provider store={store}>
+    <Game />
+  </Provider>
+);

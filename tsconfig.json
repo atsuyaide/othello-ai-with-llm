@@ -1,22 +1,15 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2017",
-        "lib": [
-            "dom",
-            "es2017"
-        ],
-        "rootDir": "src",
-        "outDir": "build",
-        "sourceMap": true,
-        "jsx": "react",
-        "noImplicitAny": true,
-        "strictNullChecks": true,
-        "baseUrl": "./src"
-    },
-    "exclude": [
-      "**/*.spec.ts",
-      "node_modules",
-      "public"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "lib": ["dom", "es2017"],
+    "rootDir": "src",
+    "outDir": "build",
+    "sourceMap": true,
+    "jsx": "react",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "baseUrl": "./src"
+  },
+  "exclude": ["**/*.spec.ts", "node_modules", "public"]
 }

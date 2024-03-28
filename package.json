@@ -1,5 +1,5 @@
 {
-  "name": "othello-ai",
+  "name": "othello-ai-with-llm",
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.prod.js",
@@ -14,6 +14,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-logger": "^3.0.5",
     "lodash": "^4.17.4",
+    "prettier": "^3.2.5",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
