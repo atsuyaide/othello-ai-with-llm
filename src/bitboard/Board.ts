@@ -1,5 +1,5 @@
+import * as UiTypes from "@app/ui/types";
 import * as _ from "lodash";
-import * as UiTypes from "ui/types";
 
 // black: 00
 // white: 01

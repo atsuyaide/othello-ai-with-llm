@@ -1,11 +1,9 @@
-import * as Board from "bitboard/Board";
-import * as Move from "bitboard/move";
+import * as actions from "@app/ui/actions";
+import { Main } from "@app/ui/components/Main";
+import { CellState, Color, Place } from "@app/ui/types";
 import * as _ from "lodash";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
-import * as actions from "ui/actions";
-import { Main } from "ui/components/Main";
-import { CellState, Color, Place } from "ui/types";
 
 export interface GameState {
   positions: Position[];

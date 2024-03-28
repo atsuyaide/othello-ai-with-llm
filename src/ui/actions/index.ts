@@ -1,4 +1,4 @@
-import { Place } from "ui/types";
+import { Place } from "@app/ui/types";
 
 export type Action =
   | ClickCellAction

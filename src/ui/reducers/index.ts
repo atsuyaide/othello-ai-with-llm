@@ -1,10 +1,10 @@
-import * as Ai from "ai";
-import { fromUiState, reverse, toUiState } from "bitboard/Board";
-import * as Move from "bitboard/move";
+import * as Ai from "@app/ai";
+import { fromUiState, reverse, toUiState } from "@app/bitboard/Board";
+import * as Move from "@app/bitboard/move";
+import { Action } from "@app/ui/actions";
+import { GameState, Position } from "@app/ui/containers/Game";
+import { CellState, Color, Place } from "@app/ui/types";
 import * as _ from "lodash";
-import { Action } from "ui/actions";
-import { GameState, Position } from "ui/containers/Game";
-import { CellState, Color, Place } from "ui/types";
 
 function turn(state: Color, action: Action): Color {
   return state == "b" ? "w" : "b";

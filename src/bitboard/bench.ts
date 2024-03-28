@@ -1,6 +1,6 @@
-import { Board, fromUiState } from "bitboard/Board";
-import * as Move from "bitboard/move";
 import * as _ from "lodash";
+import { Board, fromUiState } from "./Board";
+import * as Move from "./move";
 
 export function randomBoard(): Board {
   const cells: any = Array(64).map(() => _.sample(["b", "w", "."]));

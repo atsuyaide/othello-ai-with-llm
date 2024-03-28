@@ -1,6 +1,6 @@
-import { evaluate } from "ai/eval";
-import { Board, reverse, stones } from "bitboard/Board";
-import * as Move from "bitboard/move";
+import { evaluate } from "@app/ai/eval";
+import { Board, reverse, stones } from "@app/bitboard/Board";
+import * as Move from "@app/bitboard/move";
 import * as _ from "lodash";
 
 const FullSearchCount = 12;

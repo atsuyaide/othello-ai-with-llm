@@ -1,8 +1,7 @@
+import { Cell } from "@app/ui/components/Cell";
+import * as style from "@app/ui/constants/style";
+import { CellState, Place } from "@app/ui/types";
 import * as _ from "lodash";
-import * as React from "react";
-import { Cell } from "ui/components/Cell";
-import * as style from "ui/constants/style";
-import { CellState, Place } from "ui/types";
 
 export interface BoardProps {
   cells: CellState[];

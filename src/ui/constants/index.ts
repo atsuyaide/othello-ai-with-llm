@@ -1,5 +1,5 @@
+import { CellState } from "@app/ui/types";
 import * as _ from "lodash";
-import { CellState } from "ui/types";
 
 export const initialBoard: CellState[] = [
   ".",

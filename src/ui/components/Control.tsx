@@ -1,5 +1,4 @@
-import * as React from "react";
-import * as style from "ui/constants/style";
+import * as style from "@app/ui/constants/style";
 
 export interface ControlProps {
   onClickPass: () => void;

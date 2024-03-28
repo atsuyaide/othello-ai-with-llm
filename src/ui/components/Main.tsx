@@ -1,9 +1,9 @@
+import { Board, OnClickCell } from "@app/ui/components/Board";
+import { Control } from "@app/ui/components/Control";
+import * as style from "@app/ui/constants/style";
+import { CellState, Color, Place } from "@app/ui/types";
 import * as _ from "lodash";
 import * as React from "react";
-import { Board, OnClickCell } from "ui/components/Board";
-import { Control } from "ui/components/Control";
-import * as style from "ui/constants/style";
-import { CellState, Color, Place } from "ui/types";
 
 export interface MainProps {
   cells: CellState[];

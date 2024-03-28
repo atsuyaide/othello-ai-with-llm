@@ -1,6 +1,5 @@
-import * as React from "react";
-import * as style from "ui/constants/style";
-import { CellState, Color, Place } from "ui/types";
+import * as style from "@app/ui/constants/style";
+import { CellState, Color, Place } from "@app/ui/types";
 
 export interface CellProps {
   place: Place;

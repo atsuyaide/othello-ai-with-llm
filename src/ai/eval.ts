@@ -1,5 +1,5 @@
-import * as Board from "bitboard/Board";
-import * as Move from "bitboard/move";
+import * as Board from "@app/bitboard/Board";
+import * as Move from "@app/bitboard/move";
 
 const k = 3;
 
