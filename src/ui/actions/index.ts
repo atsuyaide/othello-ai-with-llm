@@ -1,26 +1,35 @@
-import { Place } from "ui/types"
+import { Place } from "@app/ui/types";
 
-export type Action = ClickCellAction | ClickPrevAction | ClickPassAction | LaunchAiAction
+export type Action =
+  | ClickCellAction
+  | ClickPrevAction
+  | ClickPassAction
+  | LaunchAiAction;
 
-interface ClickCellAction {
-    type: "click_cell"
-    place: Place
+export interface BoardAction {
+  type: string;
+  place?: Place;
+}
+
+export interface ClickCellAction extends BoardAction {
+  type: "click_cell";
+  place: Place;
 }
 export function clickCell(place: Place): ClickCellAction {
-    return { type: "click_cell", place }
+  return { type: "click_cell", place };
 }
 
-interface ClickPrevAction {
-    type: "click_prev"
+export interface ClickPrevAction extends BoardAction {
+  type: "click_prev";
 }
-export const clickPrev = { type: "click_prev" }
+export const clickPrev: ClickPrevAction = { type: "click_prev" };
 
-interface ClickPassAction {
-    type: "click_pass"
+export interface ClickPassAction extends BoardAction {
+  type: "click_pass";
 }
-export const clickPass = { type: "click_pass" }
+export const clickPass: ClickPassAction = { type: "click_pass" };
 
-interface LaunchAiAction {
-    type: "launch_ai"
+export interface LaunchAiAction extends BoardAction {
+  type: "launch_ai";
 }
-export const aiMove = { type: "launch_ai" }
+export const aiMove: LaunchAiAction = { type: "launch_ai" };
