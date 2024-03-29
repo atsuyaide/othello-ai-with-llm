@@ -24,8 +24,12 @@ function mapStateToProps(state: GameState) {
     position.turn == "b"
       ? Board.fromUiState(position.cells)
       : Board.reverse(Board.fromUiState(position.cells));
+  console.log(Move.movables(board));
+
   const [black, white] =
     position.turn == "b" ? Board.stones(board) : Board.stones(board).reverse();
+
+  // 終了判定
   let status: Status = "normal";
   if (Move.movables(board).length == 0) {
     if (Move.movables(Board.reverse(board)).length == 0) {

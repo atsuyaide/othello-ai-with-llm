@@ -6,3 +6,4 @@ export const controlHeight = 30;
 export const mainWidth = boardWidth + boardMargin * 2;
 export const mainHeight = boardWidth + boardMargin + controlHeight;
 export const stoneMargin = 2;
+export const movableMargin = 4;

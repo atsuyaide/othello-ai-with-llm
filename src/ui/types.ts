@@ -3,5 +3,5 @@ export interface Place {
   y: number;
 }
 
-export type CellState = "." | "b" | "w";
+export type CellState = "." | "b" | "w" | "*";
 export type Color = "b" | "w";
