@@ -1,5 +1,6 @@
 import * as style from "@app/ui/constants/style";
 import { CellState, Color, Place } from "@app/ui/types";
+import { CSSProperties } from "react";
 
 export interface CellProps {
   place: Place;
@@ -15,7 +16,7 @@ export const Cell = (props: CellProps) => (
   </div>
 );
 
-const cellStyle = (highlight: boolean, scale: number = 1) => ({
+const cellStyle = (highlight: boolean, scale: number = 1): CSSProperties => ({
   float: "left",
   width: style.cellWidth * scale,
   height: style.cellWidth * scale,

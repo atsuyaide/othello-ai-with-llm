@@ -6,7 +6,12 @@ export type Action =
   | ClickPassAction
   | LaunchAiAction;
 
-interface ClickCellAction {
+export interface BoardAction {
+  type: string;
+  place?: Place;
+}
+
+export interface ClickCellAction extends BoardAction {
   type: "click_cell";
   place: Place;
 }
@@ -14,17 +19,17 @@ export function clickCell(place: Place): ClickCellAction {
   return { type: "click_cell", place };
 }
 
-interface ClickPrevAction {
+export interface ClickPrevAction extends BoardAction {
   type: "click_prev";
 }
-export const clickPrev = { type: "click_prev" };
+export const clickPrev: ClickPrevAction = { type: "click_prev" };
 
-interface ClickPassAction {
+export interface ClickPassAction extends BoardAction {
   type: "click_pass";
 }
-export const clickPass = { type: "click_pass" };
+export const clickPass: ClickPassAction = { type: "click_pass" };
 
-interface LaunchAiAction {
+export interface LaunchAiAction extends BoardAction {
   type: "launch_ai";
 }
-export const aiMove = { type: "launch_ai" };
+export const aiMove: LaunchAiAction = { type: "launch_ai" };

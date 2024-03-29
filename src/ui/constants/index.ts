@@ -1,5 +1,6 @@
 import { CellState } from "@app/ui/types";
 import * as _ from "lodash";
+import { GameState } from "../containers/Game";
 
 export const initialBoard: CellState[] = [
   ".",
@@ -186,6 +187,16 @@ wwbbwbbb
 wwwwwwbb
 bbbbbbbb
 `);
+
+export const initialState: GameState = {
+  positions: [
+    {
+      cells: initialBoard,
+      turn: "b",
+    },
+  ],
+  playerColor: "b",
+};
 
 function toState(str: string) {
   return _.flatten(

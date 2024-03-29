@@ -8,12 +8,12 @@ const MinScore = -10000;
 const MaxScore = 10000;
 const TimeoutMS = 500;
 
-interface MoveScore {
+export interface MoveScore {
   score: number;
   place: { x: number; y: number };
 }
 
-interface Place {
+export interface Place {
   x: number;
   y: number;
 }

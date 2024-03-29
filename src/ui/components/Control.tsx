@@ -26,7 +26,7 @@ export const Control = (props: ControlProps) => (
   </div>
 );
 
-const controlStyle = (scale: number = 1) => ({
+const controlStyle = () => ({
   width: style.mainWidth,
   height: style.controlHeight,
   margin: style.boardMargin,

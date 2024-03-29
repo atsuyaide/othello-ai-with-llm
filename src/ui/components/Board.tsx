@@ -31,7 +31,7 @@ export const Board = (props: BoardProps) => (
   </div>
 );
 
-const boardStyle = (scale: number = 1) => ({
+const boardStyle = () => ({
   width: style.boardWidth,
   height: style.boardWidth,
   margin: style.boardMargin,
@@ -58,7 +58,7 @@ export const BoardRow = (props: BoardRowProps) => (
   </div>
 );
 
-const boardRowStyle = (scale: number = 1) => ({
+const boardRowStyle = () => ({
   width: style.boardWidth,
   height: style.cellWidth + style.cellMargin * 2,
 });

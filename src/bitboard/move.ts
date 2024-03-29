@@ -11,7 +11,7 @@ export function movableIndices(desc: Board): number[] {
   return _.range(8 * 8).filter((i) => canMove(desc, i % 8, (i / 8) >> 0));
 }
 
-function rowToTriplet(row: number): number {
+export function rowToTriplet(row: number): number {
   const cells = _.range(8).map((i) => (row >> ((7 - i) * 2)) & 0b11);
   return _.reduce(cells, (acc, c) => acc * 3 + c, 0);
 }
