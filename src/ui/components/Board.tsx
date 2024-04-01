@@ -14,7 +14,7 @@ export interface OnClickCell {
 }
 
 export const Board = (props: BoardProps) => (
-  <div style={boardStyle()}>
+  <div style={boardStyle()} data-testid="board-component">
     {_.range(8).map((rowIdx) => (
       <BoardRow
         key={rowIdx}

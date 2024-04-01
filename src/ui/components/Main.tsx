@@ -34,7 +34,7 @@ const Main = (props: MainProps) => {
     }
   }, [props]);
   return (
-    <div style={mainStyle()}>
+    <div style={mainStyle()} data-testid="main-component">
       <Board
         cells={props.cells}
         onClickCell={props.onClickCell}

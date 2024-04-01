@@ -1,0 +1,24 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Control > renders correctly 1`] = `
+<div
+  data-testid="control-component"
+  style="width: 356px; height: 30px; margin: 10px;"
+>
+  <div>
+    2
+     - 
+    3
+  </div>
+  <div>
+    <span
+      style="margin-right: 10px;"
+    >
+      Prev
+    </span>
+    <span>
+      Pass
+    </span>
+  </div>
+</div>
+`;
