@@ -20,7 +20,7 @@ describe("Cell", () => {
 
   it("calls onClick function when clicked", () => {
     const onClickMock = vi.fn();
-    const { container } = render(
+    render(
       <Cell
         place={{ x: 1, y: 1 }}
         state="w"
@@ -29,10 +29,9 @@ describe("Cell", () => {
       />
     );
 
-    const firstChild = container.firstChild as Element;
-    fireEvent.click(firstChild);
+    const cell = screen.getByTestId("cell");
+    fireEvent.click(cell);
 
-    expect(container.firstChild).not.toBeNull();
     expect(onClickMock).toHaveBeenCalledTimes(1);
   });
 

@@ -12,7 +12,11 @@ export interface CellProps {
 }
 
 export const Cell = (props: CellProps) => (
-  <div style={cellStyle(props.highlight)} onClick={props.onClick}>
+  <div
+    style={cellStyle(props.highlight)}
+    onClick={props.onClick}
+    data-testid="cell"
+  >
     {props.state === "." && null}
     {props.state === "b" && (
       <span data-testid="stone" style={stoneStyle(props.state)} />
