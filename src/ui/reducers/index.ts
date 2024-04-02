@@ -16,6 +16,13 @@ export function cells(state: CellState[]): CellState[] {
   return state;
 }
 
+/**
+ * ゲームの状態を更新するための関数です。
+ *
+ * @param state - 現在のゲームの状態
+ * @param place - 石を置く場所の座標（オプション）
+ * @returns 更新されたゲームの状態
+ */
 export function move(state: GameState, place?: Place): GameState {
   const latest = _.last(state.positions) as Position;
   const nextTurn: Color = latest.turn == "b" ? "w" : "b";
