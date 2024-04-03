@@ -17,7 +17,7 @@ export function cells(state: CellState[]): CellState[] {
 }
 
 /**
- * ゲームの状態を更新するための関数です。
+ * ゲームの状態を更新するための関数.
  *
  * @param state - 現在のゲームの状態
  * @param place - 石を置く場所の座標（オプション）
@@ -66,7 +66,7 @@ export function move(state: GameState, place?: Place): GameState {
 }
 
 /**
- * Reducer関数です。
+ * Reducer関数.
  * @param state 現在のゲームの状態
  * @param action 実行されたアクション
  * @returns 新しいゲームの状態

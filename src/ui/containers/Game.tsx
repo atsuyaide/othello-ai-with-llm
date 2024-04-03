@@ -21,7 +21,7 @@ export interface Position {
 }
 
 /**
- * mapStateToProps関数は、ゲームの状態をReduxのストアから取得し、コンポーネントのプロパティにマッピングします。
+ * mapStateToProps関数は、ゲームの状態をReduxのストアから取得し、コンポーネントのプロパティにマッピング.
  *
  * @param state ゲームの状態を表すGameStateオブジェクト
  * @returns コンポーネントのプロパティとしてマッピングされたオブジェクト
@@ -58,33 +58,33 @@ export function mapStateToProps(state: GameState) {
 }
 
 /**
- * ディスパッチャーをマッピングするための関数です。
+ * ディスパッチャーをマッピングするための関数.
  * @param dispatch ディスパッチャー関数
  * @returns マッピングされたディスパッチャー関数のオブジェクト
  */
 export function mapDispatchToProps(dispatch: Dispatch<actions.BoardAction>) {
   return {
     /**
-     * セルをクリックしたときに呼び出されるコールバック関数です。
+     * セルをクリックしたときに呼び出されるコールバック関数.
      * @param place クリックされたセルの場所
      */
     onClickCell(place: Place) {
       dispatch(actions.clickCell(place));
     },
     /**
-     * 「Prev」ボタンがクリックされたときに呼び出されるコールバック関数です。
+     * 「Prev」ボタンがクリックされたときに呼び出されるコールバック関数.
      */
     onClickPrev() {
       dispatch(actions.clickPrev);
     },
     /**
-     * 「Pass」ボタンがクリックされたときに呼び出されるコールバック関数です。
+     * 「Pass」ボタンがクリックされたときに呼び出されるコールバック関数.
      */
     onClickPass() {
       dispatch(actions.clickPass);
     },
     /**
-     * AIを起動するためのコールバック関数です。
+     * AIを起動するためのコールバック関数.
      */
     launchAi() {
       dispatch(actions.aiMove);
@@ -93,7 +93,7 @@ export function mapDispatchToProps(dispatch: Dispatch<actions.BoardAction>) {
 }
 
 /**
- * ゲームコンポーネントです。
- * mapStateToPropsとmapDispatchToPropsを使用してMainコンポーネントと接続します。
+ * ゲームコンポーネント.
+ * mapStateToPropsとmapDispatchToPropsを使用してMainコンポーネントと接続.
  */
 export const Game = connect(mapStateToProps, mapDispatchToProps)(Main);
