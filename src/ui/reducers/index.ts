@@ -51,7 +51,7 @@ export function move(state: GameState, place?: Place): GameState {
     latest.turn == "b"
       ? Move.move(board, place.x, place.y)
       : reverse(Move.move(board, place.x, place.y));
-  let nextCells = toUiState(nextBoard);
+  const nextCells = toUiState(nextBoard);
 
   // 次のターンがプレイヤーの場合は置ける場所を表示
   if (nextTurn == state.playerColor) {
