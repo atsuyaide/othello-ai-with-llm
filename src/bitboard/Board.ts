@@ -60,7 +60,6 @@ export function stones(board: Board): number[] {
 }
 
 export function fromUiState(cells: UiTypes.CellState[]): Board {
-  console.log(cells);
   const rows = _.chunk(cells, 8).map((row) => genRow(row));
   const cols = (
     _.zip.apply(null, _.chunk(cells, 8)) as UiTypes.CellState[][]

@@ -57,7 +57,6 @@ export function move(state: GameState, place?: Place): GameState {
   if (nextTurn == state.playerColor) {
     const movablePlaces = Move.movables(nextBoard);
     movablePlaces.forEach((p) => {
-      console.log(p);
       nextCells[p.y * 8 + p.x] = "*";
     });
   }
