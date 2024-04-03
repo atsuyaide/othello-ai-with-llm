@@ -50,57 +50,64 @@ describe("move", () => {
     expect(newState).toEqual(expectedState);
   });
 
-  // it("should return the same game state when an invalid move is made", () => {
-  //   const initialState = {
-  //     positions: [
-  //       {
-  //         cells: [
-  //           ["", "", ""],
-  //           ["", "b", ""],
-  //           ["", "", ""],
-  //         ],
-  //         turn: "b",
-  //       },
-  //     ],
-  //     latestMove: undefined,
-  //   };
+  it("should return the same game state when an invalid move is made", () => {
+    const initialState: GameState = {
+      positions: [
+        {
+          cells: initialBoard,
+          turn: "b",
+        },
+      ],
+      latestMove: undefined,
+      playerColor: "b",
+    };
 
-  //   const newState = move(initialState, { x: 0, y: 0 });
+    const newState = move(initialState, { x: 0, y: 0 });
 
-  //   expect(newState).toEqual(initialState);
-  // });
+    expect(newState).toEqual(initialState);
+  });
 
-  // it("should return the updated game state when no move is provided", () => {
-  //   const initialState = {
-  //     positions: [
-  //       {
-  //         cells: [
-  //           ["", "", ""],
-  //           ["", "b", ""],
-  //           ["", "", ""],
-  //         ],
-  //         turn: "b",
-  //       },
-  //     ],
-  //     latestMove: undefined,
-  //   };
+  it("should return the updated game state when no move is provided", () => {
+    const canNotMoveBoard: CellState[] = _.flatten(
+      [
+        "........",
+        "........",
+        "........",
+        "...ww...",
+        "...ww...",
+        "........",
+        "........",
+        "........",
+      ].map((r) => r.split("") as CellState[])
+    );
+    const initialState: GameState = {
+      positions: [
+        {
+          cells: canNotMoveBoard,
+          turn: "b",
+        },
+      ],
+      latestMove: undefined,
+      playerColor: "b",
+    };
 
-  //   const expectedState = {
-  //     positions: [
-  //       {
-  //         cells: [
-  //           ["", "", ""],
-  //           ["", "b", ""],
-  //           ["", "", ""],
-  //         ],
-  //         turn: "w",
-  //       },
-  //     ],
-  //     latestMove: undefined,
-  //   };
+    const expectedState: GameState = {
+      positions: [
+        {
+          cells: canNotMoveBoard,
+          turn: "b",
+        },
+        {
+          cells: canNotMoveBoard,
+          turn: "w",
+        },
+      ],
+      latestMove: undefined,
+      playerColor: "b",
+    };
 
-  //   const newState = move(initialState);
+    const newState = move(initialState);
 
-  //   expect(newState).toEqual(expectedState);
-  // });
+    expect(newState).toEqual(expectedState);
+  });
 });

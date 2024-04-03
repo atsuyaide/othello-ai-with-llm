@@ -6,5 +6,6 @@ export interface Place {
   y: number; // 縦 1, 2, 3, 4, 5, 6, 7, 8 に対応する.
 }
 
+// 盤面上のセルの状態を表す型. "." は空きマス, "b" は黒石, "w" は白石, "*"は石を置ける場所を表す.
 export type CellState = "." | "b" | "w" | "*";
 export type Color = "b" | "w";
