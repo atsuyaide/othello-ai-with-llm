@@ -51,6 +51,16 @@ export function move(state: GameState, place?: Place): GameState {
     latest.turn == "b"
       ? Move.move(board, place.x, place.y)
       : reverse(Move.move(board, place.x, place.y));
+  let nextCells = toUiState(nextBoard);
+
+  // 次のターンがプレイヤーの場合は置ける場所を表示
+  if (nextTurn == state.playerColor) {
+    const movablePlaces = Move.movables(nextBoard);
+    movablePlaces.forEach((p) => {
+      console.log(p);
+      nextCells[p.y * 8 + p.x] = "*";
+    });
+  }
 
   // 石を置いた後の状態を返す
   return {
@@ -58,7 +68,7 @@ export function move(state: GameState, place?: Place): GameState {
     latestMove: place,
     positions: _.concat(state.positions, [
       {
-        cells: toUiState(nextBoard),
+        cells: nextCells,
         turn: nextTurn,
       },
     ]),

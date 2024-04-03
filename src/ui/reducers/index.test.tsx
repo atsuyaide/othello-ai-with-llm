@@ -50,6 +50,61 @@ describe("move", () => {
 
     expect(newState).toEqual(expectedState);
   });
+  it("should return the updated game state when a valid mode is made and nextTurn is plyerColor", () => {
+    const initialBoard: CellState[] = _.flatten(
+      [
+        "........",
+        "........",
+        "........",
+        "...wb...",
+        "...bbb..",
+        "........",
+        "........",
+        "........",
+      ].map((r) => r.split("") as CellState[])
+    );
+    const initialState: GameState = {
+      positions: [
+        {
+          cells: initialBoard,
+          turn: "w",
+        },
+      ],
+      latestMove: undefined,
+      playerColor: "b",
+    };
+
+    const expectedBoard: CellState[] = _.flatten(
+      [
+        "........",
+        "........",
+        "..*****.",
+        "...www..",
+        "...bbb..",
+        "........",
+        "........",
+        "........",
+      ].map((r) => r.split("") as CellState[])
+    );
+    const expectedState: GameState = {
+      positions: [
+        {
+          cells: initialBoard,
+          turn: "w",
+        },
+        {
+          cells: expectedBoard,
+          turn: "b",
+        },
+      ],
+      latestMove: { x: 5, y: 3 },
+      playerColor: "b",
+    };
+
+    const newState = move(initialState, { x: 5, y: 3 });
+
+    expect(newState).toEqual(expectedState);
+  });
 
   it("should return the same game state when an invalid move is made", () => {
     const initialState: GameState = {
