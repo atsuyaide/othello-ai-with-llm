@@ -31,6 +31,7 @@ export function move(state: GameState, place?: Place): GameState {
       ? fromUiState(latest.cells)
       : reverse(fromUiState(latest.cells));
 
+  // placeが指定されていない場合はパス
   if (!place)
     return {
       ...state,
@@ -42,13 +43,16 @@ export function move(state: GameState, place?: Place): GameState {
       ]),
     };
 
+  // x, yに置けなければ何もしない
   if (!Move.canMove(board, place.x, place.y)) return state;
 
+  // placeに置けるので石を置く
   const nextBoard =
     latest.turn == "b"
       ? Move.move(board, place.x, place.y)
       : reverse(Move.move(board, place.x, place.y));
 
+  // 石を置いた後の状態を返す
   return {
     ...state,
     latestMove: place,
@@ -61,6 +65,12 @@ export function move(state: GameState, place?: Place): GameState {
   };
 }
 
+/**
+ * Reducer関数です。
+ * @param state 現在のゲームの状態
+ * @param action 実行されたアクション
+ * @returns 新しいゲームの状態
+ */
 export const reducers: Reducer<GameState, Action> = (
   state = Constants.initialState,
   action

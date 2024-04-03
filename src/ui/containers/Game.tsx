@@ -7,12 +7,14 @@ import * as _ from "lodash";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
+// ゲームの状態を表すGameStateインターフェース
 export interface GameState {
-  positions: Position[];
+  positions: Position[]; // 盤面の状態のリスト
   playerColor: Color;
-  latestMove?: Place;
+  latestMove?: Place; // 最後に置かれた石の場所
 }
 
+// 盤面の状態を表すPositionインターフェース
 export interface Position {
   turn: Color;
   cells: CellState[];

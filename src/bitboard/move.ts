@@ -3,19 +3,44 @@ import { MoveTable, lookupMoveTable } from "@app/bitboard/MoveTable";
 import * as UiTypes from "@app/ui/types";
 import * as _ from "lodash";
 
+/**
+ * 指定されたボードの移動可能な場所を返します。
+ * @param desc ボードの状態を表すデスクリプタ
+ * @returns 移動可能な場所の配列
+ */
 export function movables(desc: Board): UiTypes.Place[] {
   return movableIndices(desc).map((i) => ({ x: i % 8, y: (i / 8) >> 0 }));
 }
 
+/**
+ * 指定されたボードの移動可能なインデックスを返します。
+ *
+ * @param desc ボードの状態を表す配列
+ * @returns 移動可能なインデックスの配列
+ */
 export function movableIndices(desc: Board): number[] {
   return _.range(8 * 8).filter((i) => canMove(desc, i % 8, (i / 8) >> 0));
 }
 
+/**
+ * 行番号を三進数の数値に変換します。
+ *
+ * @param row 変換する行番号
+ * @returns 変換された三進数の数値
+ */
 export function rowToTriplet(row: number): number {
   const cells = _.range(8).map((i) => (row >> ((7 - i) * 2)) & 0b11);
   return _.reduce(cells, (acc, c) => acc * 3 + c, 0);
 }
 
+/**
+ * 指定された座標に駒を移動できるかどうかを判定します。
+ *
+ * @param desc ボードの状態を表すオブジェクト
+ * @param x X座標
+ * @param y Y座標
+ * @returns 駒を移動できる場合はtrue、そうでない場合はfalse
+ */
 export function canMove(desc: Board, x: number, y: number): boolean {
   // row
   if (lookupMoveTable(desc.rows[y], x) != 0) return true;
@@ -43,6 +68,14 @@ export function canMove(desc: Board, x: number, y: number): boolean {
   return false;
 }
 
+/**
+ * 盤面を更新して指定された位置に石を置く関数です。
+ *
+ * @param desc - 現在の盤面の状態
+ * @param x - 石を置く位置のx座標
+ * @param y - 石を置く位置のy座標
+ * @returns 更新された盤面の状態
+ */
 export function move(desc: Board, x: number, y: number): Board {
   const next = _.cloneDeep(desc);
   // row

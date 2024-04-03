@@ -1,6 +1,8 @@
+import * as _ from "lodash";
 import { describe, expect, it } from "vitest";
 import { initialBoard } from "../constants";
 import { GameState } from "../containers/Game";
+import { CellState } from "../types";
 import { move } from "./index";
 
 describe("move", () => {
@@ -16,18 +18,34 @@ describe("move", () => {
       playerColor: "b",
     };
 
+    const expectedBoard: CellState[] = _.flatten(
+      [
+        "........",
+        "........",
+        "........",
+        "...wb...",
+        "...bbb..",
+        "........",
+        "........",
+        "........",
+      ].map((r) => r.split("") as CellState[])
+    );
     const expectedState = {
       positions: [
         {
           cells: initialBoard,
+          turn: "b",
+        },
+        {
+          cells: expectedBoard,
           turn: "w",
         },
       ],
-      latestMove: { x: 2, y: 2 },
-      playerColor: "w",
+      latestMove: { x: 5, y: 4 },
+      playerColor: "b",
     };
 
-    const newState = move(initialState, { x: 2, y: 2 });
+    const newState = move(initialState, { x: 5, y: 4 });
 
     expect(newState).toEqual(expectedState);
   });
