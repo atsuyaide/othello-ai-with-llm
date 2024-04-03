@@ -32,10 +32,12 @@ export const Cell = (props: CellProps) => (
 
 const cellStyle = (highlight: boolean, scale: number = 1): CSSProperties => ({
   float: "left",
+  position: "relative",
   width: style.cellWidth * scale,
   height: style.cellWidth * scale,
   margin: style.cellMargin * scale,
   background: highlight ? Constants.boardColorHighlight : Constants.boardColor,
+  alignItems: "center",
 });
 
 const stoneStyle = (color: Color, scale: number = 1) => ({
@@ -48,9 +50,10 @@ const stoneStyle = (color: Color, scale: number = 1) => ({
   margin: style.stoneMargin,
 });
 
-const movableStyle = (scale: number = 0.1) => ({
-  width: (style.cellWidth - style.stoneMargin * 2) * scale,
-  height: (style.cellWidth - style.stoneMargin * 2) * scale,
+const movableStyle = (scale: number = 1) => ({
+  display: "inline-block",
+  width: (style.cellWidth - style.movableMargin * 2) * scale,
+  height: (style.cellWidth - style.movableMargin * 2) * scale,
   borderRadius: style.cellWidth * scale,
   background: Constants.movableCellColor,
   margin: style.movableMargin,

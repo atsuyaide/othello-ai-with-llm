@@ -3,7 +3,7 @@
 exports[`Cell > renders correctly 1`] = `
 <div
   data-testid="cell"
-  style="float: left; width: 40px; height: 40px; margin: 1px; background: rgb(0, 153, 0);"
+  style="float: left; position: relative; width: 40px; height: 40px; margin: 1px; background: rgb(0, 153, 0); align-items: center;"
 >
   <span
     data-testid="stone"

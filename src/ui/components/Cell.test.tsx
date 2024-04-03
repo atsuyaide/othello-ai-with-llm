@@ -108,9 +108,9 @@ describe("Cell", () => {
     const marker = screen.getByTestId("marker");
     const markerStyle = window.getComputedStyle(marker);
 
-    expect(markerStyle.getPropertyValue("border-radius")).equal("4px");
+    expect(markerStyle.getPropertyValue("border-radius")).equal("40px");
     expect(markerStyle.getPropertyValue("background-color")).equal(
-      "rgb(85, 85, 85)"
+      "rgba(255, 255, 255, 0.475)"
     );
   });
 });
