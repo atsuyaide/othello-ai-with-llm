@@ -16,6 +16,13 @@ export function cells(state: CellState[]): CellState[] {
   return state;
 }
 
+/**
+ * ゲームの状態を更新するための関数.
+ *
+ * @param state - 現在のゲームの状態
+ * @param place - 石を置く場所の座標（オプション）
+ * @returns 更新されたゲームの状態
+ */
 export function move(state: GameState, place?: Place): GameState {
   const latest = _.last(state.positions) as Position;
   const nextTurn: Color = latest.turn == "b" ? "w" : "b";
@@ -24,6 +31,7 @@ export function move(state: GameState, place?: Place): GameState {
       ? fromUiState(latest.cells)
       : reverse(fromUiState(latest.cells));
 
+  // placeが指定されていない場合はパス
   if (!place)
     return {
       ...state,
@@ -35,25 +43,43 @@ export function move(state: GameState, place?: Place): GameState {
       ]),
     };
 
+  // x, yに置けなければ何もしない
   if (!Move.canMove(board, place.x, place.y)) return state;
 
+  // placeに置けるので石を置く
   const nextBoard =
     latest.turn == "b"
       ? Move.move(board, place.x, place.y)
       : reverse(Move.move(board, place.x, place.y));
+  const nextCells = toUiState(nextBoard);
 
+  // 次のターンがプレイヤーの場合は置ける場所を表示
+  if (nextTurn == state.playerColor) {
+    const movablePlaces = Move.movables(nextBoard);
+    movablePlaces.forEach((p) => {
+      nextCells[p.y * 8 + p.x] = "*";
+    });
+  }
+
+  // 石を置いた後の状態を返す
   return {
     ...state,
     latestMove: place,
     positions: _.concat(state.positions, [
       {
-        cells: toUiState(nextBoard),
+        cells: nextCells,
         turn: nextTurn,
       },
     ]),
   };
 }
 
+/**
+ * Reducer関数.
+ * @param state 現在のゲームの状態
+ * @param action 実行されたアクション
+ * @returns 新しいゲームの状態
+ */
 export const reducers: Reducer<GameState, Action> = (
   state = Constants.initialState,
   action
@@ -95,42 +121,3 @@ export const reducers: Reducer<GameState, Action> = (
 
   return state;
 };
-
-// export function reducers(state: GameState, action: Action): GameState {
-//   const latestPosition = state.positions[state.positions.length - 1];
-//   if (action.type == "click_cell" && latestPosition.turn == state.playerColor) {
-//     return move(state, action.place);
-//   }
-//
-//   if (action.type == "click_pass" && latestPosition.turn == state.playerColor) {
-//     return move(state);
-//   }
-//
-//   if (action.type == "launch_ai" && latestPosition.turn != state.playerColor) {
-//     const board =
-//       latestPosition.turn == "b"
-//         ? fromUiState(latestPosition.cells)
-//         : reverse(fromUiState(latestPosition.cells));
-//     const moves = Ai.run(board);
-//
-//     console.log("--- ai moves");
-//     console.log(moves.map((m) => `${m.place.x},${m.place.y} ${m.score}`));
-//     return move(state, moves.length > 0 ? moves[0].place : undefined);
-//   }
-//
-//   if (action.type == "click_prev") {
-//     const positions = state.positions;
-//     if (positions.length <= 1) return { ...state, positions };
-//     const currTurn = (_.last(positions) as Position).turn;
-//     positions.pop();
-//     while (
-//       positions.length > 0 &&
-//       (_.last(positions) as Position).turn != currTurn
-//     ) {
-//       positions.pop();
-//     }
-//     return { ...state, positions, latestMove: undefined };
-//   }
-//
-//   return state;
-// }

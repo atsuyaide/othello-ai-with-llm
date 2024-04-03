@@ -61,9 +61,9 @@ export function stones(board: Board): number[] {
 
 export function fromUiState(cells: UiTypes.CellState[]): Board {
   const rows = _.chunk(cells, 8).map((row) => genRow(row));
-  const cols = (_.zip.apply(null, _.chunk(cells, 8)) as Cell[][]).map((col) =>
-    genRow(col)
-  );
+  const cols = (
+    _.zip.apply(null, _.chunk(cells, 8)) as UiTypes.CellState[][]
+  ).map((col) => genRow(col));
   const diagsR = genDiagsR(cells).map((diag) => genRow(diag));
   const diagsL = genDiagsR(
     _.flatten(_.chunk(cells, 8).map((r) => _.reverse(r)))
@@ -80,20 +80,18 @@ export function toUiState(board: Board): UiTypes.CellState[] {
   );
 }
 
-type Cell = "." | "b" | "w";
-
-function genRow(row: Cell[]): Row {
+function genRow(row: UiTypes.CellState[]): Row {
   return _.reduce(row, (octet, cell) => (octet << 2) + cellToByte(cell), 0);
 }
 
-function cellToByte(cell: Cell): number {
+function cellToByte(cell: UiTypes.CellState): number {
   if (cell === "b") return 0;
   if (cell === "w") return 1;
   if (cell === ".") return 2;
   return 3;
 }
 
-function genDiagsR(cells: Cell[]): Cell[][] {
+function genDiagsR(cells: UiTypes.CellState[]): UiTypes.CellState[][] {
   const rows = _.chunk(cells, 8);
   // (0, 0), (1, -1), (2, -2), ...
   // (0, 1), (1, 0),  (2, -1), ...

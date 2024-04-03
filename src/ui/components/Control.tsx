@@ -9,7 +9,7 @@ export interface ControlProps {
 }
 
 export const Control = (props: ControlProps) => (
-  <div style={controlStyle()}>
+  <div style={controlStyle()} data-testid="control-component">
     <div>
       {props.black} - {props.white}
     </div>
