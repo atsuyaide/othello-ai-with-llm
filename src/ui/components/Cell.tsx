@@ -7,6 +7,7 @@ export interface CellProps {
   place: Place;
   state: CellState;
   scale?: number;
+  evalScore?: number;
   highlight: boolean;
   onClick: () => void;
 }
@@ -27,8 +28,8 @@ export const Cell = (props: CellProps) => (
     {props.state === "*" && (
       <span data-testid="marker" style={movableStyle()} />
     )}
-    {props.state === "*" && (
-      <div style={evalValueStyle()}>{props.place.x + 1}</div>
+    {props.state === "*" && props.evalScore && (
+      <div style={evalValueStyle()}>{props.evalScore}</div>
     )}
   </div>
 );

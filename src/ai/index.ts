@@ -18,12 +18,24 @@ export interface Place {
   y: number;
 }
 
+/**
+ * AIの実行関数です。
+ *
+ * @param board オセロの盤面
+ * @returns 各手のスコアの配列
+ */
 export function run(board: Board): MoveScore[] {
   if (64 - board.stones <= FullSearchCount) return fullSearch(board);
   return iterativeDeepning(board);
 }
 
-function iterativeDeepning(board: Board): MoveScore[] {
+/**
+ * 深さ優先探索を用いて、指定されたボードの評価値のリストを返す関数です。
+ *
+ * @param board ボードの状態
+ * @returns 評価値のリスト
+ */
+export function iterativeDeepning(board: Board): MoveScore[] {
   console.log("iterative deepning");
   const movables = Move.movables(board);
   const timelimit = Date.now() + TimeoutMS;
@@ -49,6 +61,17 @@ function iterativeDeepning(board: Board): MoveScore[] {
   return _.sortBy(scores, (s) => -s.score);
 }
 
+/**
+ * alphaBetaEval関数は、アルファベータ法を使用して盤面の評価値を計算します。
+ *
+ * @param board 盤面の状態
+ * @param depth 探索の深さ
+ * @param a アルファ値
+ * @param b ベータ値
+ * @param tl 制限時間
+ * @returns 評価値
+ * @throws "tle" 制限時間を超過した場合にスローされます
+ */
 function alphaBetaEval(
   board: Board,
   depth: number,
@@ -69,6 +92,12 @@ function alphaBetaEval(
   return a;
 }
 
+/**
+ * ボードをフルサーチして、可能な手のスコアを返す関数です。
+ *
+ * @param board ボードの状態
+ * @returns スコアと手の配列
+ */
 function fullSearch(board: Board): MoveScore[] {
   console.log("full search");
   const movables = Move.movables(board);
@@ -84,6 +113,15 @@ function fullSearch(board: Board): MoveScore[] {
   return _.sortBy(scores, (s) => -s.score);
 }
 
+/**
+ * alphaBetaFull関数は、アルファベータ法を使用してオセロのAIの評価値を計算します。
+ *
+ * @param board オセロの盤面
+ * @param passes パスの回数
+ * @param a アルファ値
+ * @param b ベータ値
+ * @returns 評価値
+ */
 function alphaBetaFull(
   board: Board,
   passes: number,

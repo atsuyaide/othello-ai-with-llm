@@ -5,6 +5,7 @@ import * as _ from "lodash";
 
 export interface BoardProps {
   cells: CellState[];
+  evalScores?: number[];
   highlight?: Place;
   onClickCell: OnClickCell;
 }
@@ -20,6 +21,11 @@ export const Board = (props: BoardProps) => (
         key={rowIdx}
         rowIdx={rowIdx}
         cells={props.cells.slice(rowIdx * 8, (rowIdx + 1) * 8)}
+        evalScores={
+          props.evalScores
+            ? props.evalScores.slice(rowIdx * 8, (rowIdx + 1) * 8)
+            : undefined
+        }
         onClickCell={props.onClickCell}
         highlight={
           props.highlight && props.highlight.y == rowIdx
@@ -40,6 +46,7 @@ const boardStyle = () => ({
 export interface BoardRowProps {
   rowIdx: number;
   cells: CellState[];
+  evalScores?: number[];
   onClickCell: OnClickCell;
   highlight?: number;
 }
@@ -51,6 +58,7 @@ export const BoardRow = (props: BoardRowProps) => (
         key={colIdx}
         place={{ x: colIdx, y: props.rowIdx }}
         state={props.cells[colIdx]}
+        evalScore={props.evalScores ? props.evalScores[colIdx] : undefined}
         onClick={() => props.onClickCell({ x: colIdx, y: props.rowIdx })}
         highlight={props.highlight ? props.highlight == colIdx : false}
       />

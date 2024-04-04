@@ -65,6 +65,7 @@ export function move(state: GameState, place?: Place): GameState {
   return {
     ...state,
     latestMove: place,
+    moveScores: Ai.iterativeDeepning(fromUiState(nextCells)),
     positions: _.concat(state.positions, [
       {
         cells: nextCells,

@@ -37,6 +37,7 @@ const Main = (props: MainProps) => {
     <div style={mainStyle()} data-testid="main-component">
       <Board
         cells={props.cells}
+        evalScores={Array.from({ length: 64 }, (_, i) => i)}
         onClickCell={props.onClickCell}
         highlight={props.latestMove}
       />
