@@ -1,3 +1,5 @@
+import { iterativeDeepning } from "@app/ai";
+import { fromUiState } from "@app/bitboard/Board";
 import { Board, OnClickCell } from "@app/ui/components/Board";
 import { Control } from "@app/ui/components/Control";
 import * as style from "@app/ui/constants/style";
@@ -33,11 +35,16 @@ const Main = (props: MainProps) => {
       setTimeout(() => props.launchAi(), 20);
     }
   }, [props]);
+
+  let evalScores = Array.from({ length: 64 }, (_, i) => i);
+  iterativeDeepning(fromUiState(props.cells)).map((v) => {
+    evalScores[v.place.y * 8 + v.place.x] = v.score;
+  });
   return (
     <div style={mainStyle()} data-testid="main-component">
       <Board
         cells={props.cells}
-        evalScores={Array.from({ length: 64 }, (_, i) => i)}
+        evalScores={evalScores}
         onClickCell={props.onClickCell}
         highlight={props.latestMove}
       />

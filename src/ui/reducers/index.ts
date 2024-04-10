@@ -102,7 +102,7 @@ export const reducers: Reducer<GameState, Action> = (
     const moves = Ai.run(board);
 
     console.log("--- ai moves");
-    console.log(moves.map((m) => `${m.place.x},${m.place.y} ${m.score}`));
+    // console.log(moves.map((m) => `${m.place.x},${m.place.y} ${m.score}`));
     return move(state, moves.length > 0 ? moves[0].place : undefined);
   }
 
