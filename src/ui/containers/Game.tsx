@@ -1,4 +1,4 @@
-import * as AiMove from "@app/ai";
+import * as Ai from "@app/ai";
 import * as Board from "@app/bitboard/Board";
 import * as Move from "@app/bitboard/move";
 import * as actions from "@app/ui/actions";
@@ -12,8 +12,8 @@ import { Dispatch } from "redux";
 export interface GameState {
   positions: Position[]; // 盤面の状態のリスト
   playerColor: Color;
-  latestMove?: Place; // 最後に置かれた石の場所
-  moveScores?: AiMove.MoveScore[]; // AIの手のスコア
+  moveScores: Ai.MoveScore[]; // AIの手のスコア
+  latestMove?: Place; // 最後に置かれた石の場所. 初手の場合はundefined
 }
 
 // 盤面の状態を表すPositionインターフェース
@@ -34,7 +34,7 @@ export function mapStateToProps(state: GameState) {
     position.turn == "b"
       ? Board.fromUiState(position.cells)
       : Board.reverse(Board.fromUiState(position.cells));
-  console.log(Move.movables(board));
+  // console.log(Move.movables(board));
 
   const [black, white] =
     position.turn == "b" ? Board.stones(board) : Board.stones(board).reverse();
@@ -56,6 +56,7 @@ export function mapStateToProps(state: GameState) {
     white,
     playerColor: state.playerColor,
     latestMove: state.latestMove,
+    moveScores: state.moveScores,
   };
 }
 

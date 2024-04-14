@@ -32,7 +32,8 @@ export function move(state: GameState, place?: Place): GameState {
       : reverse(fromUiState(latest.cells));
 
   // placeが指定されていない場合はパス
-  if (!place)
+  if (!place) {
+    console.log("pass");
     return {
       ...state,
       positions: _.concat(state.positions, [
@@ -42,9 +43,13 @@ export function move(state: GameState, place?: Place): GameState {
         },
       ]),
     };
+  }
 
   // x, yに置けなければ何もしない
-  if (!Move.canMove(board, place.x, place.y)) return state;
+  if (!Move.canMove(board, place.x, place.y)) {
+    console.log("can't move");
+    return state;
+  }
 
   // placeに置けるので石を置く
   const nextBoard =
@@ -62,6 +67,7 @@ export function move(state: GameState, place?: Place): GameState {
   }
 
   // 石を置いた後の状態を返す
+  console.log("move");
   return {
     ...state,
     latestMove: place,
@@ -99,10 +105,12 @@ export const reducers: Reducer<GameState, Action> = (
       latestPosition.turn == "b"
         ? fromUiState(latestPosition.cells)
         : reverse(fromUiState(latestPosition.cells));
+    //置ける場所のスコアを取得
     const moves = Ai.run(board);
+    console.log(state.moveScores);
 
     console.log("--- ai moves");
-    // console.log(moves.map((m) => `${m.place.x},${m.place.y} ${m.score}`));
+    // movesの長さが0よりも大きい場合は、最前の手を置く. そうでない場合はパス
     return move(state, moves.length > 0 ? moves[0].place : undefined);
   }
 

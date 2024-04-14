@@ -25,7 +25,9 @@ export interface Place {
  * @returns 各手のスコアの配列
  */
 export function run(board: Board): MoveScore[] {
+  // 盤面の石の数がFullSearchCount以下の場合はフルサーチ
   if (64 - board.stones <= FullSearchCount) return fullSearch(board);
+  // それ以外の場合は反復深化探索
   return iterativeDeepning(board);
 }
 
@@ -128,10 +130,14 @@ function alphaBetaFull(
   a: number,
   b: number
 ): number {
+  // 盤面の石の数が64の場合は、石の数の差を返す
   const [black, white] = stones(board);
   if (board.stones == 64) return black - white;
+
   const movables = Move.movables(board);
+  // 手がなく、パスの回数が1回以上の場合は、石の数の差を返す
   if (movables.length == 0 && passes > 0) return black - white;
+  // 手がなく、パスの回数が0回の場合は、相手の手番で再帰的に評価値を計算
   if (movables.length == 0)
     return -alphaBetaFull(reverse(board), passes + 1, -b, -a);
   for (const move of movables) {
@@ -139,5 +145,6 @@ function alphaBetaFull(
     a = _.max([a, -alphaBetaFull(nextDesc, passes, -b, -a)]) as number;
     if (a >= b) return a;
   }
+  // すべての手を試した後は、アルファ値を返す
   return a;
 }

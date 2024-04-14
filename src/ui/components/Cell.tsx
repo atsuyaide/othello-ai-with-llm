@@ -28,7 +28,7 @@ export const Cell = (props: CellProps) => (
     {props.state === "*" && (
       <span data-testid="marker" style={movableStyle()} />
     )}
-    {props.state === "*" && props.evalScore && (
+    {props.state === "*" && props.evalScore !== undefined && (
       <div style={evalValueStyle()}>{props.evalScore}</div>
     )}
   </div>

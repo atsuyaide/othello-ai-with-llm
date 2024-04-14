@@ -1,5 +1,4 @@
-import { iterativeDeepning } from "@app/ai";
-import { fromUiState } from "@app/bitboard/Board";
+import * as Ai from "@app/ai";
 import { Board, OnClickCell } from "@app/ui/components/Board";
 import { Control } from "@app/ui/components/Control";
 import * as style from "@app/ui/constants/style";
@@ -19,12 +18,14 @@ export interface MainProps {
   playerColor: Color;
   black: number;
   white: number;
+  moveScores: Ai.MoveScore[];
 }
 
 export type Status = "normal" | "pass" | "finished";
 
 const Main = (props: MainProps) => {
   useEffect(() => {
+    console.log(`---------turn: ${props.turn}---------`);
     console.log(`${props.black} - ${props.white}`);
     console.log(
       _.chunk(props.cells, 8)
@@ -37,7 +38,7 @@ const Main = (props: MainProps) => {
   }, [props]);
 
   let evalScores = Array.from({ length: 64 }, (_, i) => i);
-  iterativeDeepning(fromUiState(props.cells)).map((v) => {
+  props.moveScores.map((v) => {
     evalScores[v.place.y * 8 + v.place.x] = v.score;
   });
   return (

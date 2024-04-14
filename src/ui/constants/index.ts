@@ -143,6 +143,12 @@ export const initialState: GameState = {
     },
   ],
   playerColor: "b",
+  moveScores: [
+    { score: 0, place: { x: 3, y: 2 } },
+    { score: 0, place: { x: 2, y: 3 } },
+    { score: 0, place: { x: 5, y: 4 } },
+    { score: 0, place: { x: 4, y: 5 } },
+  ],
 };
 
 function toState(str: string) {
