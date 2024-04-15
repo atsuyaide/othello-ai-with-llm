@@ -33,6 +33,7 @@ export function run(board: Board): MoveScore[] {
 
 /**
  * 深さ優先探索を用いて、指定されたボードの評価値のリストを返す関数です。
+ * scoreが高いほど白にとって有利です。低いほど黒に有利です。
  *
  * @param board ボードの状態
  * @returns 評価値のリスト
@@ -40,18 +41,19 @@ export function run(board: Board): MoveScore[] {
 export function iterativeDeepning(board: Board): MoveScore[] {
   console.log("iterative deepning");
   const movables = Move.movables(board);
-  const timelimit = Date.now() + TimeoutMS;
+  const limitMS = Date.now() + TimeoutMS;
   let scores: MoveScore[] = [];
 
   for (let depth = 3; ; depth++) {
     try {
       scores = movables.map((place) => ({
+        // 評価値を計算. -をつけているのは、相手の評価値を計算するため
         score: -alphaBetaEval(
-          reverse(Move.move(board, place.x, place.y)),
-          depth - 1,
-          -MaxScore,
-          -MinScore,
-          timelimit
+          reverse(Move.move(board, place.x, place.y)), // 盤面を更新. 1手進める
+          depth - 1, // 深さを減らす. 1つ前の深さの評価値を計算
+          -MaxScore, // アルファ値. これより小さい値が返ってきたら打ち切る
+          -MinScore, // ベータ値. これより大きい値が返ってきたら打ち切る
+          limitMS // 制限時間. これを超えたら例外を投げる
         ),
         place,
       }));

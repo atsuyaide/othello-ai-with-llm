@@ -16,6 +16,12 @@ export interface Board {
   stones: number;
 }
 
+/**
+ * 指定されたボードを反転させ、石の位置を反転します。
+ *
+ * @param desc - 反転するボード。
+ * @returns 反転されたボード。
+ */
 export function reverse(desc: Board): Board {
   const ma = 0b1010101010101010;
   const mb = 0b0101010101010101;
