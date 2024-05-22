@@ -3,7 +3,8 @@ import { Board, reverse, stones } from "@app/bitboard/Board";
 import * as Move from "@app/bitboard/move";
 import * as _ from "lodash";
 
-const FullSearchCount = 12;
+// 全探索は時間がかかりすぎるので一旦無効化
+const FullSearchCount = 1; // 12;
 const MinScore = -10000;
 const MaxScore = 10000;
 const TimeoutMS = 500;
