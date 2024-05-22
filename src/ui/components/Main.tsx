@@ -1,3 +1,4 @@
+import * as Ai from "@app/ai";
 import { Board, OnClickCell } from "@app/ui/components/Board";
 import { Control } from "@app/ui/components/Control";
 import * as style from "@app/ui/constants/style";
@@ -17,12 +18,14 @@ export interface MainProps {
   playerColor: Color;
   black: number;
   white: number;
+  moveScores: Ai.MoveScore[];
 }
 
 export type Status = "normal" | "pass" | "finished";
 
 const Main = (props: MainProps) => {
   useEffect(() => {
+    console.log(`---------turn: ${props.turn}---------`);
     console.log(`${props.black} - ${props.white}`);
     console.log(
       _.chunk(props.cells, 8)
@@ -33,10 +36,16 @@ const Main = (props: MainProps) => {
       setTimeout(() => props.launchAi(), 20);
     }
   }, [props]);
+
+  let evalScores = Array.from({ length: 64 }, (_, i) => i);
+  props.moveScores.map((v) => {
+    evalScores[v.place.y * 8 + v.place.x] = v.score;
+  });
   return (
     <div style={mainStyle()} data-testid="main-component">
       <Board
         cells={props.cells}
+        evalScores={evalScores}
         onClickCell={props.onClickCell}
         highlight={props.latestMove}
       />

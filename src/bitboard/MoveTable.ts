@@ -1,5 +1,12 @@
 import * as _ from "lodash";
 
+/**
+ * ムーブテーブルから指定された行と列の値を取得します。
+ *
+ * @param row 取得する行のインデックス
+ * @param x 取得する列のインデックス
+ * @returns 指定された行と列の値
+ */
 export function lookupMoveTable(row: number, x: number): number {
   return MoveTable[row][x];
 }

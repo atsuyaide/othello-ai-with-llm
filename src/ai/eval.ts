@@ -3,6 +3,12 @@ import * as Move from "@app/bitboard/move";
 
 const k = 3;
 
+/**
+ * 盤面を評価してスコアを返す関数です。
+ *
+ * @param board 評価する盤面
+ * @returns スコア
+ */
 export function evaluate(board: Board.Board): number {
   const rev = Board.reverse(board);
   const movablesScore =
@@ -11,6 +17,12 @@ export function evaluate(board: Board.Board): number {
   return movablesScore + lineScore;
 }
 
+/**
+ * 盤面の行、列、対角線のスコアを計算する関数です。
+ *
+ * @param board 盤面オブジェクト
+ * @returns スコアの合計値
+ */
 function calcLineScore(board: Board.Board): number {
   return [
     board.rows[0],

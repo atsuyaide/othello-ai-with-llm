@@ -32,9 +32,12 @@ export function move(state: GameState, place?: Place): GameState {
       : reverse(fromUiState(latest.cells));
 
   // placeが指定されていない場合はパス
-  if (!place)
+  if (!place) {
+    console.log("pass");
+    const moveScores = Ai.run(board);
     return {
       ...state,
+      moveScores: moveScores,
       positions: _.concat(state.positions, [
         {
           cells: latest.cells,
@@ -42,9 +45,13 @@ export function move(state: GameState, place?: Place): GameState {
         },
       ]),
     };
+  }
 
   // x, yに置けなければ何もしない
-  if (!Move.canMove(board, place.x, place.y)) return state;
+  if (!Move.canMove(board, place.x, place.y)) {
+    console.log("can't move");
+    return state;
+  }
 
   // placeに置けるので石を置く
   const nextBoard =
@@ -56,15 +63,22 @@ export function move(state: GameState, place?: Place): GameState {
   // 次のターンがプレイヤーの場合は置ける場所を表示
   if (nextTurn == state.playerColor) {
     const movablePlaces = Move.movables(nextBoard);
+    console.log(movablePlaces);
     movablePlaces.forEach((p) => {
       nextCells[p.y * 8 + p.x] = "*";
     });
   }
 
   // 石を置いた後の状態を返す
+  console.log("move");
+  const moveScores =
+    latest.turn == "b" ? Ai.run(reverse(nextBoard)) : Ai.run(nextBoard);
+  console.log(`${nextTurn} can move places: ${moveScores.length}`);
+  console.log(moveScores);
   return {
     ...state,
     latestMove: place,
+    moveScores: moveScores,
     positions: _.concat(state.positions, [
       {
         cells: nextCells,
@@ -94,15 +108,22 @@ export const reducers: Reducer<GameState, Action> = (
   }
 
   if (action.type == "launch_ai" && latestPosition.turn != state.playerColor) {
-    const board =
-      latestPosition.turn == "b"
-        ? fromUiState(latestPosition.cells)
-        : reverse(fromUiState(latestPosition.cells));
-    const moves = Ai.run(board);
+    // const board =
+    //   latestPosition.turn == "b"
+    //     ? fromUiState(latestPosition.cells)
+    //     : reverse(fromUiState(latestPosition.cells));
+    // //置ける場所のスコアを取得
+    // const moves = Ai.run(board);
+    // console.log(moves);
+    // console.log(state.moveScores);
 
     console.log("--- ai moves");
-    console.log(moves.map((m) => `${m.place.x},${m.place.y} ${m.score}`));
-    return move(state, moves.length > 0 ? moves[0].place : undefined);
+    // 置ける場所がない場合はパス. ある場合は最善の手を打つ
+    // return move(state, moves.length > 0 ? moves[0].place : undefined);
+    return move(
+      state,
+      state.moveScores.length > 0 ? state.moveScores[0].place : undefined
+    );
   }
 
   if (action.type == "click_prev") {

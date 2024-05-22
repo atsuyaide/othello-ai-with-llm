@@ -12,3 +12,4 @@ export const boardColorHighlight = "#5d5";
 export const stoneColorBlack = "#202720";
 export const stoneColorWhite = "#fff";
 export const movableCellColor = "#ffffff79";
+export const evalValueFontColor = "#ffffff79";

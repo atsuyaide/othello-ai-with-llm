@@ -7,6 +7,7 @@ export interface CellProps {
   place: Place;
   state: CellState;
   scale?: number;
+  evalScore?: number;
   highlight: boolean;
   onClick: () => void;
 }
@@ -26,6 +27,9 @@ export const Cell = (props: CellProps) => (
     )}
     {props.state === "*" && (
       <span data-testid="marker" style={movableStyle()} />
+    )}
+    {props.state === "*" && props.evalScore !== undefined && (
+      <div style={evalValueStyle()}>{props.evalScore}</div>
     )}
   </div>
 );
@@ -50,11 +54,18 @@ const stoneStyle = (color: Color, scale: number = 1) => ({
   margin: style.stoneMargin,
 });
 
-const movableStyle = (scale: number = 1) => ({
+const movableStyle = (scale: number = 1): CSSProperties => ({
   display: "inline-block",
   width: (style.cellWidth - style.movableMargin * 2) * scale,
   height: (style.cellWidth - style.movableMargin * 2) * scale,
   borderRadius: style.cellWidth * scale,
   background: Constants.movableCellColor,
   margin: style.movableMargin,
+});
+
+const evalValueStyle = (): CSSProperties => ({
+  position: "absolute",
+  top: style.cellWidth * 0.05,
+  left: style.cellWidth * 0.05,
+  color: style.evalValueFontColor,
 });
